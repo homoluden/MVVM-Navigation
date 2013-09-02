@@ -20,6 +20,10 @@ namespace ViewModels
 
         private RelayCommand<Page3ViewModel> _goToPage3Command;
 
+        private Page1ViewModel _p1ViewModel = new Page1ViewModel();
+        private Page2ViewModel _p2ViewModel = new Page2ViewModel();
+        private Page3ViewModel _p3ViewModel = new Page3ViewModel();
+
         #endregion
 
 
@@ -67,20 +71,17 @@ namespace ViewModels
                 RaisePropertyChanged("GoToPage3Command");
             }
         }
-
-        private Page1ViewModel _p1ViewModel = new Page1ViewModel();
+                
         public Page1ViewModel Page1ViewModel
         {
             get { return _p1ViewModel; }
         }
 
-        private Page2ViewModel _p2ViewModel = new Page2ViewModel();
         public Page2ViewModel Page2ViewModel
         {
             get { return _p2ViewModel; }
         }
 
-        private Page3ViewModel _p3ViewModel = new Page3ViewModel();
         public Page3ViewModel Page3ViewModel
         {
             get { return _p3ViewModel; }
@@ -128,21 +129,21 @@ namespace ViewModels
         {
             var uri = new Uri("pack://application:,,,/Pages;component/Page1.xaml");
 
-            Navigation.Navigate(uri, new Page1ViewModel());
+            Navigation.Navigate(uri, Page1ViewModel);
         }
 
         private void GoToPage2CommandExecute(Page2ViewModel viewModel)
         {
             var uri = new Uri("pack://application:,,,/Pages;component/Page2.xaml");
 
-            Navigation.Navigate(uri, new Page2ViewModel());
+            Navigation.Navigate(uri, Page1ViewModel);
         }
 
         private void GoToPage3CommandExecute(Page3ViewModel viewModel)
         {
             var uri = new Uri("pack://application:,,,/Pages;component/Page3.xaml");
 
-            Navigation.Navigate(uri, new Page3ViewModel());
+            Navigation.Navigate(uri, Page1ViewModel);
         }
     }
 }
