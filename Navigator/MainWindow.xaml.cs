@@ -1,5 +1,4 @@
-﻿using NavigationHelpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +29,7 @@ namespace Navigator
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            Navigation.Service = MainFrame.NavigationService;
+            Navigation.Navigation.Service = MainFrame.NavigationService;
 
             DataContext = new MainViewModel();
         }

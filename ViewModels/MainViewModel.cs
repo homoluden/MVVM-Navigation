@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-using NavigationHelpers;
 using Helpers;
+using System.ComponentModel;
+using Navigator.Navigation;
 
 namespace ViewModels
 {
@@ -14,15 +14,15 @@ namespace ViewModels
 
         private RelayCommand<string> _goToPathCommand;
 
-        private RelayCommand<Page1ViewModel> _goToPage1Command;
+        private RelayCommand<INotifyPropertyChanged> _goToPage1Command;
 
-        private RelayCommand<Page2ViewModel> _goToPage2Command;
+        private RelayCommand<INotifyPropertyChanged> _goToPage2Command;
 
-        private RelayCommand<Page3ViewModel> _goToPage3Command;
+        private RelayCommand<INotifyPropertyChanged> _goToPage3Command;
 
-        private Page1ViewModel _p1ViewModel = new Page1ViewModel();
-        private Page2ViewModel _p2ViewModel = new Page2ViewModel();
-        private Page3ViewModel _p3ViewModel = new Page3ViewModel();
+        private readonly INotifyPropertyChanged _p1ViewModel = new Page1ViewModel();
+        private readonly INotifyPropertyChanged _p2ViewModel = new Page2ViewModel();
+        private readonly INotifyPropertyChanged _p3ViewModel = new Page3ViewModel();
 
         #endregion
 
@@ -39,7 +39,7 @@ namespace ViewModels
             }
         }
 
-        public RelayCommand<Page1ViewModel> GoToPage1Command
+        public RelayCommand<INotifyPropertyChanged> GoToPage1Command
         {
             get 
             { 
@@ -52,7 +52,7 @@ namespace ViewModels
             }
         }
 
-        public RelayCommand<Page2ViewModel> GoToPage2Command
+        public RelayCommand<INotifyPropertyChanged> GoToPage2Command
         {
             get { return _goToPage2Command; }
             set
@@ -62,7 +62,7 @@ namespace ViewModels
             }
         }
 
-        public RelayCommand<Page3ViewModel> GoToPage3Command
+        public RelayCommand<INotifyPropertyChanged> GoToPage3Command
         {
             get { return _goToPage3Command; }
             set
@@ -71,18 +71,18 @@ namespace ViewModels
                 RaisePropertyChanged("GoToPage3Command");
             }
         }
-                
-        public Page1ViewModel Page1ViewModel
+
+        public INotifyPropertyChanged Page1ViewModel
         {
             get { return _p1ViewModel; }
         }
 
-        public Page2ViewModel Page2ViewModel
+        public INotifyPropertyChanged Page2ViewModel
         {
             get { return _p2ViewModel; }
         }
 
-        public Page3ViewModel Page3ViewModel
+        public INotifyPropertyChanged Page3ViewModel
         {
             get { return _p3ViewModel; }
         }
@@ -106,11 +106,11 @@ namespace ViewModels
             
             GoToPathCommand = new RelayCommand<string>(GoToPathCommandExecute);
 
-            GoToPage1Command = new RelayCommand<Page1ViewModel>(GoToPage1CommandExecute);
+            GoToPage1Command = new RelayCommand<INotifyPropertyChanged>(GoToPage1CommandExecute);
 
-            GoToPage2Command = new RelayCommand<Page2ViewModel>(GoToPage2CommandExecute);
+            GoToPage2Command = new RelayCommand<INotifyPropertyChanged>(GoToPage2CommandExecute);
 
-            GoToPage3Command = new RelayCommand<Page3ViewModel>(GoToPage3CommandExecute);
+            GoToPage3Command = new RelayCommand<INotifyPropertyChanged>(GoToPage3CommandExecute);
         }
 
         private void GoToPathCommandExecute(string path)
@@ -125,21 +125,21 @@ namespace ViewModels
             Navigation.Navigate(uri);
         }
 
-        private void GoToPage1CommandExecute(Page1ViewModel viewModel)
+        private void GoToPage1CommandExecute(INotifyPropertyChanged viewModel)
         {
             var uri = new Uri("pack://application:,,,/Pages;component/Page1.xaml");
 
             Navigation.Navigate(uri, Page1ViewModel);
         }
 
-        private void GoToPage2CommandExecute(Page2ViewModel viewModel)
+        private void GoToPage2CommandExecute(INotifyPropertyChanged viewModel)
         {
             var uri = new Uri("pack://application:,,,/Pages;component/Page2.xaml");
 
             Navigation.Navigate(uri, Page1ViewModel);
         }
 
-        private void GoToPage3CommandExecute(Page3ViewModel viewModel)
+        private void GoToPage3CommandExecute(INotifyPropertyChanged viewModel)
         {
             var uri = new Uri("pack://application:,,,/Pages;component/Page3.xaml");
 

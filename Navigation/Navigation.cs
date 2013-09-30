@@ -1,19 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Concurrent;
-using System.Linq;
-using System.Text;
-
 using System.Windows.Navigation;
 using System.Windows.Controls;
+using Navigator.Navigation.Interfaces;
 
-namespace NavigationHelpers
+namespace Navigator.Navigation
 {
     public sealed class Navigation
     {
+        #region Constants
+
+        public static readonly string Page1Alias = "Page1";
+        public static readonly string Page2Alias = "Page2";
+        public static readonly string Page3Alias = "Page3";
+        public static readonly string NotFoundPageAlias = "404";
+
+        #endregion
+
         #region Fields
 
-        private NavigationService _navService = null;
+        private NavigationService _navService;
+        private readonly IPageResolver _resolver;
 
         #endregion
 
@@ -55,17 +61,19 @@ namespace NavigationHelpers
             Navigate(page, null);
         }
 
-        public static void Navigate(Uri uri, object context)
+        public static void Navigate(string uri, object context)
         {
             if (Instance._navService == null || uri == null)
             {
                 return;
             }
 
-            Instance._navService.Navigate(uri, context);
+            var page = Instance._resolver.GetPageInstance(uri);
+
+            Navigate(page, context);
         }
 
-        public static void Navigate(Uri uri)
+        public static void Navigate(string uri)
         {
             Navigate(uri, null);
         }
@@ -92,25 +100,28 @@ namespace NavigationHelpers
 
         #region Singleton
 
-        private static volatile Navigation instance;
-        private static object syncRoot = new Object();
+        private static volatile Navigation _instance;
+        private static readonly object SyncRoot = new Object();
 
-        private Navigation() { }
+        private Navigation()
+        {
+            _resolver = new PagesResolver();
+        }
 
         private static Navigation Instance
         {
             get 
             {
-                if (instance == null) 
+                if (_instance == null) 
                 {
-                    lock (syncRoot) 
+                    lock (SyncRoot) 
                     {
-                        if (instance == null)
-                            instance = new Navigation();
+                        if (_instance == null)
+                            _instance = new Navigation();
                     }
                 }
 
-                return instance;
+                return _instance;
             }
         }
         #endregion
