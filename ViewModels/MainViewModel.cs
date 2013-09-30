@@ -113,37 +113,29 @@ namespace ViewModels
             GoToPage3Command = new RelayCommand<INotifyPropertyChanged>(GoToPage3CommandExecute);
         }
 
-        private void GoToPathCommandExecute(string path)
+        private void GoToPathCommandExecute(string alias)
         {
-            if (string.IsNullOrWhiteSpace(path))
+            if (string.IsNullOrWhiteSpace(alias))
             {
                 return;
             }
             
-            var uri = new Uri(path);
-
-            Navigation.Navigate(uri);
+            Navigation.Navigate(alias);
         }
 
         private void GoToPage1CommandExecute(INotifyPropertyChanged viewModel)
         {
-            var uri = new Uri("pack://application:,,,/Pages;component/Page1.xaml");
-
-            Navigation.Navigate(uri, Page1ViewModel);
+            Navigation.Navigate(Navigation.Page1Alias, Page1ViewModel);
         }
 
         private void GoToPage2CommandExecute(INotifyPropertyChanged viewModel)
         {
-            var uri = new Uri("pack://application:,,,/Pages;component/Page2.xaml");
-
-            Navigation.Navigate(uri, Page1ViewModel);
+            Navigation.Navigate(Navigation.Page2Alias, Page1ViewModel);
         }
 
         private void GoToPage3CommandExecute(INotifyPropertyChanged viewModel)
         {
-            var uri = new Uri("pack://application:,,,/Pages;component/Page3.xaml");
-
-            Navigation.Navigate(uri, Page1ViewModel);
+            Navigation.Navigate(Navigation.Page3Alias, Page1ViewModel);
         }
     }
 }
