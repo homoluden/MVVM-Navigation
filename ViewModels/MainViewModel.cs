@@ -104,9 +104,9 @@ namespace ViewModels
 
         #region Constructors
 
-        public MainViewModel()
+        public MainViewModel(IViewModelsResolver resolver)
         {
-            _resolver = new ViewModelsResolver();
+            _resolver = resolver;
 
             _p1ViewModel = _resolver.GetViewModelInstance(Page1ViewModelAlias);
             _p2ViewModel = _resolver.GetViewModelInstance(Page2ViewModelAlias);

@@ -31,7 +31,7 @@ namespace Navigator
         {
             Navigation.Navigation.Service = MainFrame.NavigationService;
 
-            DataContext = new MainViewModel();
+            DataContext = new MainViewModel(new ViewModelsResolver());
         }
     }
 }
