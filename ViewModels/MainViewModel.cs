@@ -5,12 +5,24 @@ using System.Text;
 using Helpers;
 using System.ComponentModel;
 using Navigator.Navigation;
+using ViewModels.Interfaces;
 
 namespace ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+        #region Constants
+
+        public static readonly string Page1ViewModelAlias = "Page1VM";
+        public static readonly string Page2ViewModelAlias = "Page2VM";
+        public static readonly string Page3ViewModelAlias = "Page3VM";
+        public static readonly string NotFoundPageViewModelAlias = "404VM";
+
+        #endregion
+
         #region Fields
+
+        private readonly IViewModelsResolver _resolver;
 
         private RelayCommand<string> _goToPathCommand;
 
@@ -20,9 +32,9 @@ namespace ViewModels
 
         private RelayCommand<INotifyPropertyChanged> _goToPage3Command;
 
-        private readonly INotifyPropertyChanged _p1ViewModel = new Page1ViewModel();
-        private readonly INotifyPropertyChanged _p2ViewModel = new Page2ViewModel();
-        private readonly INotifyPropertyChanged _p3ViewModel = new Page3ViewModel();
+        private readonly INotifyPropertyChanged _p1ViewModel;
+        private readonly INotifyPropertyChanged _p2ViewModel;
+        private readonly INotifyPropertyChanged _p3ViewModel;
 
         #endregion
 
@@ -94,6 +106,12 @@ namespace ViewModels
 
         public MainViewModel()
         {
+            _resolver = new ViewModelsResolver();
+
+            _p1ViewModel = _resolver.GetViewModelInstance(Page1ViewModelAlias);
+            _p2ViewModel = _resolver.GetViewModelInstance(Page2ViewModelAlias);
+            _p3ViewModel = _resolver.GetViewModelInstance(Page3ViewModelAlias);
+
             InitializeCommands();
         }
 

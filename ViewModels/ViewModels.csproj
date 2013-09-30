@@ -47,11 +47,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseViewModel.cs" />
+    <Compile Include="Interfaces\IViewModelsResolver.cs" />
     <Compile Include="Page3ViewModel.cs" />
     <Compile Include="Page2ViewModel.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Page1ViewModel.cs" />
+    <Compile Include="Page404ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModelsResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Helpers\Helpers.csproj">
