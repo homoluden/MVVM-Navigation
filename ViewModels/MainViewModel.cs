@@ -6,6 +6,7 @@ using Helpers;
 using System.ComponentModel;
 using Navigator.Navigation;
 using ViewModels.Interfaces;
+using System.Windows.Input;
 
 namespace ViewModels
 {
@@ -24,13 +25,13 @@ namespace ViewModels
 
         private readonly IViewModelsResolver _resolver;
 
-        private RelayCommand<string> _goToPathCommand;
+        private ICommand _goToPathCommand;
 
-        private RelayCommand<INotifyPropertyChanged> _goToPage1Command;
+        private ICommand _goToPage1Command;
 
-        private RelayCommand<INotifyPropertyChanged> _goToPage2Command;
+        private ICommand _goToPage2Command;
 
-        private RelayCommand<INotifyPropertyChanged> _goToPage3Command;
+        private ICommand _goToPage3Command;
 
         private readonly INotifyPropertyChanged _p1ViewModel;
         private readonly INotifyPropertyChanged _p2ViewModel;
@@ -41,7 +42,7 @@ namespace ViewModels
 
         #region Properties
 
-        public RelayCommand<string> GoToPathCommand
+        public ICommand GoToPathCommand
         {
             get { return _goToPathCommand; }
             set
@@ -51,7 +52,7 @@ namespace ViewModels
             }
         }
 
-        public RelayCommand<INotifyPropertyChanged> GoToPage1Command
+        public ICommand GoToPage1Command
         {
             get 
             { 
@@ -64,7 +65,7 @@ namespace ViewModels
             }
         }
 
-        public RelayCommand<INotifyPropertyChanged> GoToPage2Command
+        public ICommand GoToPage2Command
         {
             get { return _goToPage2Command; }
             set
@@ -74,7 +75,7 @@ namespace ViewModels
             }
         }
 
-        public RelayCommand<INotifyPropertyChanged> GoToPage3Command
+        public ICommand GoToPage3Command
         {
             get { return _goToPage3Command; }
             set
